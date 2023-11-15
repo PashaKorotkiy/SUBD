@@ -59,7 +59,7 @@
   
 ## customer
 1. `id INT` - PK
-
+2. `user_id INT` - FK
 * OneToOne to "user"
 * OneToMany to "orders"
   </br>
@@ -69,8 +69,10 @@
 
 ## employee
 1. `id INT` - PK
-2. `experience INT` - years of work 
+2. `experience INT` - years of work (ex. 12)
 3. `age INT` - age of employee
+4. `user_id INT` - FK
+5. `stores_id INT` - FK
 
 * ManyToOne to "stores"
 * OneToOne to "user"
@@ -94,9 +96,10 @@
 1. `id INT` - PK
 2. `date DATATIME` - when order was created
 3. `status VARCHAR(30)` - status of order
+4. `customer_id INT` - FK
 
+* OneToMany to "orders_products"
 * ManyToOne to "customer"
-* ManyToMany to "products"
   </br>
   </br>
   </br>
@@ -107,9 +110,10 @@
 2. `title VARCHAR(45)` - title of product
 3. `amount INT` - count of products
 4. `cost DECIMIAL(10,2)` - cost of product
+5. `supplier_id INT` - FK
 
+* OneToMany to "orders_products"
 * ManyToOne to "suppliers"
-* ManyToMany to "orders"
   </br>
   </br>
   </br>
@@ -120,6 +124,7 @@
 2. `date DATE` - date when user left a review
 3. `content TEXT` - information that user write in a review
 4. `rate INT` -  rate that user left
+5. `user_id INT` - FK
 
 * ManyToOne to "user"
   </br>
@@ -149,17 +154,32 @@
   </br>
   </br>
   </br>
-  
 
 ## journal
 1. `id INT` - PK
 2. `date DATETIME` - time of any action
+3. `user_id INT` - FK
+4. `action_type_id INT` - FK
 
 * ManyToOne to "action_type"
 * ManyToOne to "user"
   </br>
   </br>
   </br>
+
+
+## orders_products
+1. `id INT` - PK
+2. `irders_id INT` - FK
+3. `product_id INT` - FK
+
+* ManyToOne to "orders"
+* ManyToOne to "products"
+  </br>
+  </br>
+  </br>
+
+
 
 
    
